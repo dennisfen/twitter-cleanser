@@ -1,0 +1,10 @@
+{
+    "api": {
+        "key": "",
+        "secret": ""
+    },
+    "account": {
+        "token": "",
+        "secret": ""
+    }
+}
