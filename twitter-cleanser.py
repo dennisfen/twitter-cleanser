@@ -212,9 +212,12 @@ def request_confirmation(question='ok'):
 
 if __name__ == '__main__':
     argparser = argparse.ArgumentParser()
-    argparser.add_argument('--configfile', help='configuration file', default='config.json')
-    argparser.add_argument('--backupfile', help='backup file to dump tweets', default='tweet_dump.json')
-    argparser.add_argument('--processes', help='number of parallel requests', default=4)
+    argparser.add_argument('--configfile', help='configuration file',
+                            default='config.json')
+    argparser.add_argument('--backupfile', help='backup file to dump tweets',
+                            default='tweet_dump.json')
+    argparser.add_argument('--processes', help='number of parallel requests',
+                            default=4)
     args = argparser.parse_args()
 
     if os.path.exists(args.backupfile):
