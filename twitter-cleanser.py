@@ -192,13 +192,22 @@ def delete_tweet(tweet, interactive=True):
     If 'interactive' == True, then user will be asked to confirm his actions.
     '''
     if interactive:
-        answer = input('Delete \'' + tweet['text'] + '\'? [yn] ')
-        if not answer.lower() in ('y','yes'):
+        if not request_confirmation('Delete \'' + tweet['text']):
             print('Skipping this tweet')
             return
 
     print('Deleting tweet')
     api.destroy_status(tweet['id'])
+
+
+def request_confirmation(question='ok'):
+    '''
+    Ask user a 'question', read yes/no reply and return True/False respectively
+    '''
+    reply = input(question + ' [yn]? ')
+    if reply.lower() in ('y','yes'):
+        return True
+    return False
 
 
 if __name__ == '__main__':
@@ -209,8 +218,7 @@ if __name__ == '__main__':
     args = argparser.parse_args()
 
     if os.path.exists(args.backupfile):
-        answer = input('Backup file exists, delete it? [yn] ')
-        if answer.lower() in ('y','yes'):
+        if request_confirmation('Backup file exists, delete it'):
             os.remove(args.backupfile)
 
 
