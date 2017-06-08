@@ -55,7 +55,7 @@ def dump_to_file(tweet, filename='tweets_dump.json'):
 
 def print_from_file(filename='tweets_dump.json'):
     '''
-    Prints tweets read from 'file_name' to the screen.
+    Prints tweets read from 'filename' to the screen.
     '''
     try:
         with open(filename, 'r') as f:
