@@ -41,13 +41,13 @@ def authenticate(config):
     return None
 
 
-def dump_to_file(tweet, file_name='tweets_dump.json'):
+def dump_to_file(tweet, filename='tweets_dump.json'):
     '''
-    Dumps tweet to 'file_name'. Each tweet is dumped on single line to make
+    Dumps tweet to 'filename'. Each tweet is dumped on single line to make
     reading from this dump easier.
     '''
     try:
-        with open(file_name, 'a') as f:
+        with open(filename, 'a') as f:
             f.write(tweet + '\n')
     except BaseException as e:
         print('Failed to dump tweet:', str(e))
