@@ -73,6 +73,16 @@ def load_tweets_from_file(filename):
     Loads tweets from 'filename' to python list and returns it.
     File should contain tweets in JSON format, each tweet in its own line.
     '''
+    #! When you find yourself looping and appending into a list, it is often
+    #! good to refactor the code into a generator and accumulation.
+    #! A generator function will look something like:
+    #!
+    #! def load_tweets_iter(filename):
+    #!     with open(filename, 'r') as f:
+    #!        for line in f:
+    #!            yield json.loads(line)
+    #!
+    #! And the accumulation: `tweets = list(load_tweets_iter(filename))`
     tweets = []
     try:
         with open(filename, 'r') as f:
@@ -95,6 +105,9 @@ def get_tweets(api, tweets_to_read=0, dump_file=None, echo=True):
     if not echo:
         print('Reading tweets', end='', flush=True)
         
+    #! Instead of incrementing a counter yourself, you can use `enumerate`.
+    #! It will be something like:
+    #! `for n, status in enumerate(tweepy.Cursor(api.user_timeline).items(tweets_to_read):`
     n = 0
     for status in tweepy.Cursor(api.user_timeline).items(tweets_to_read):
         if dump_file:
@@ -115,6 +128,9 @@ def get_tweets(api, tweets_to_read=0, dump_file=None, echo=True):
 
 
 def filter_retweets(tweets):
+    #! It is good practice (in most cases) to use generator comprehensions
+    #! instead of list comprehensions, so that values are computed lazily.
+    #! To do that, replace the `[]` with `()`.
     return [tweet for tweet in tweets if not is_retweet(tweet)]
 
 
